@@ -14,16 +14,21 @@ module.exports.createVideo = async (req, res, next) => {
 
 module.exports.getVideo = async (req, res, next) => {
   const { idVideo } = req.params;
-  const newHistory = new History({
-    user: req.user,
-    video: idVideo,
-    date: new Date(),
-  });
   try {
-    await newHistory.save();
+    if (idVideo && req.user) {
+      const newHistory = new History({
+        user: req.user,
+        video: idVideo,
+        date: new Date(),
+      });
+      if (newHistory.video !== "undefined") {
+        await newHistory.save();
+      }
+    }
+
     await Video.findByIdAndUpdate(idVideo, {
       $inc: {
-        view: 1,
+        view: 0.5,
       },
     });
 

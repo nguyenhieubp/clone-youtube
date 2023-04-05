@@ -11,6 +11,7 @@ const ListVideo = () => {
     dispatch(fetchVideoOfUser({ userId: user }));
   }, [dispatch, user]);
   const { videos } = useAppSelector((state) => state.videoOfUser);
+  console.log(videos);
 
   return (
     <div className="grid grid-cols-4">

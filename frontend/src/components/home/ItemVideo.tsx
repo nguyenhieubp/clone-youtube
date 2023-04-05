@@ -37,7 +37,7 @@ const ItemVideo: React.FC<Video> = ({
           <div className="title-video-relate ">{title}</div>
           <div className="mt-[1rem]">
             <div className="text-[#888888] overflow-hidden line-clamp-3 ">
-              {author.name}
+              {author?.name}
             </div>
             <div className="flex  items-center mt-[1rem]">
               <div className="text-[#888888]">

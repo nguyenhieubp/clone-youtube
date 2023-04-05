@@ -24,6 +24,7 @@ export const fetchVideoOfUser = createAsyncThunk(
     const response = await axios.get(
       `http://localhost:9000/api/v1/user/listVideo/${userId}`
     );
+    console.log(response.data);
     return response.data.video;
   }
 );

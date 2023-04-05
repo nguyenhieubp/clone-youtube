@@ -7,9 +7,10 @@ const Watch: React.FC = () => {
   const token = localStorage.getItem("accessToken");
   const dispatch = useAppDispatch();
   const { video } = useParams();
+
   React.useEffect(() => {
     dispatch(fetchPlayVideo({ id: video, token: token }));
-  }, [dispatch, token, video]);
+  }, [video, token]);
   return <Index></Index>;
 };
 

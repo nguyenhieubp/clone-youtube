@@ -46,8 +46,8 @@ const Login: React.FC = () => {
       localStorage.setItem("accessToken", token);
       dispatch(fetchUsers(token));
       navigation("/");
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      setValidation(error.response.data.message);
     }
   };
 

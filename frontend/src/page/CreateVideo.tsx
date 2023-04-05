@@ -21,6 +21,8 @@ interface Video {
 }
 
 const CreateVideo: React.FC = () => {
+  const [upload, setUpload] = React.useState<boolean>();
+
   const dispatch = useAppDispatch();
   const token = localStorage.getItem("accessToken");
   const navigation = useNavigate();
@@ -64,6 +66,7 @@ const CreateVideo: React.FC = () => {
               console.log("Upload is paused");
               break;
             case "running":
+              setUpload(true);
               console.log("Upload is running");
               break;
             default:
@@ -73,6 +76,7 @@ const CreateVideo: React.FC = () => {
         (error) => {},
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setUpload(false);
             setValueVideo({ ...valueVideo, [type]: downloadURL });
           });
         }
@@ -124,7 +128,16 @@ const CreateVideo: React.FC = () => {
 
   return (
     <div className="w-full h-full overflow-hidden">
-      <div className="fixed top-0 left-0 w-full h-full bg-[#97919134]"></div>
+      <div
+        className="fixed top-0 left-0 w-full h-full bg-[#fbf9f9bc]"
+        style={upload ? { zIndex: 30 } : { zIndex: 0 }}
+      >
+        {upload && (
+          <div className="absolute  right-1/2 bottom-1/2  transform translate-x-1/2 translate-y-1/2 ">
+            <div className="border-t-transparent border-solid animate-spin  rounded-full border-blue-400 border-8 h-32 w-32"></div>
+          </div>
+        )}
+      </div>
       <div className="flex justify-center items-center relative z-10 mt-[10rem]  ">
         <form
           onSubmit={handleSubmit}

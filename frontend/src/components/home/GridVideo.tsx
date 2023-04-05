@@ -16,7 +16,7 @@ const GridVideo: React.FC = () => {
       {videos.map((video) => (
         <div key={video._id}>
           <ItemVideo
-            id={video._id}
+            id={video?._id}
             view={video.view}
             author={video.author}
             image={video.image}
